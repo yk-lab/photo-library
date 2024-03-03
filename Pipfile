@@ -1,0 +1,68 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+crispy-tailwind = "*"
+django = "*"
+django-admin-env-notice = "*"
+django-admin-filter = "*"
+django-admin-honeypot = "*"
+django-admin-inline-paginator = "*"
+django-admin-json-editor = "*"
+django-admin-search = "*"
+django-admin-sortable2 = "*"
+django-admin-tailwind = "*"
+django-allauth = "*"
+django-boost = "*"
+django-cors-headers = "*"
+django-crispy-forms = "*"
+django-cursor-pagination = "*"
+django-debug-toolbar = "*"
+django-extensions = "*"
+django-filter = "*"
+django-flags = "*"
+django-glrm = "*"
+django-guardian = "*"
+django-import-export = "*"
+django-localflavor = "*"
+django-log-request-id = "*"
+django-mathfilters = "*"
+django-model-utils = "*"
+django-oauth-toolkit = "*"
+django-on-heroku = "*"
+django-phonenumber-field = "*"
+django-sendgrid-v5 = "*"
+django-utils2 = "*"
+django-vite = "*"
+djangorestframework = "*"
+exifread = "*"
+gunicorn = "*"
+heroicons = "*"
+markdown = "*"
+pillow = "*"
+rules = "*"
+sentry-sdk = {extras = ["django"], version = "*"}
+tqdm = "*"
+ulid-py = "*"
+werkzeug = "*"
+ya-django-toolkit-jp = "*"
+
+[dev-packages]
+bandit = "*"
+boto3-stubs = {extras = ["boto3", "s3"], version = "*"}
+coverage = "*"
+django-stubs-ext = "*"
+django-stubs = {extras = ["compatible-mypy"], version = "*"}
+django-types = "*"
+djangorestframework-stubs = {extras = ["compatible-mypy"], version = "*"}
+docutils = "*"
+mypy = "*"
+pre-commit = "*"
+pygments = "*"
+ruff = "*"
+
+[requires]
+python_version = "3.12"
+python_full_version = "3.12.2"
