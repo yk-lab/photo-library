@@ -50,11 +50,11 @@ werkzeug = "*"
 ya-django-toolkit-jp = "*"
 
 [dev-packages]
-bandit = "*"
+bandit = {extras = ["toml"], version = "*"}
 boto3-stubs = {extras = ["boto3", "s3"], version = "*"}
 coverage = "*"
-django-stubs-ext = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
+django-stubs-ext = "*"
 django-types = "*"
 djangorestframework-stubs = {extras = ["compatible-mypy"], version = "*"}
 docutils = "*"

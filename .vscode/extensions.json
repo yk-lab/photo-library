@@ -6,10 +6,12 @@
         "charliermarsh.ruff",
         "cpylua.language-postcss",
         "davidanson.vscode-markdownlint",
+        "kamilturek.vscode-pyproject-toml-snippets",
         "ms-python.mypy-type-checker",
         "ms-python.python",
         "ms-python.vscode-pylance",
         "runem.lit-plugin",
-        "stuartelimu.django-template-snippets"
+        "stuartelimu.django-template-snippets",
+        "tamasfe.even-better-toml"
     ]
 }
