@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from logging import getLogger
 import os
-from .setting_utils import comma_separated_list, strtobool
+from .setting_utils import env_comma_separated_list, env_bool
 
 logger = getLogger(__name__)
 
@@ -27,10 +27,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
-SECRET_KEY_FALLBACKS = comma_separated_list(os.getenv("SECRET_KEY_FALLBACKS"))
+SECRET_KEY_FALLBACKS = env_comma_separated_list("SECRET_KEY_FALLBACKS")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = strtobool(os.getenv("DEBUG", "False"))
+DEBUG = env_bool("DEBUG", False)
 
 ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host]
 
@@ -39,7 +39,7 @@ ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "").split(",") if h
 ENVIRONMENT = os.getenv("ENVIRONMENT", "Local")
 
 # HTTPS 設定
-FORCE_HTTPS = strtobool(os.getenv("FORCE_HTTPS", f"{ENVIRONMENT != 'Local'}"))
+FORCE_HTTPS = env_bool("FORCE_HTTPS", ENVIRONMENT != "Local")
 if FORCE_HTTPS:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
