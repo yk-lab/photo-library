@@ -77,6 +77,9 @@ INSTALLED_APPS = [
     # "phonenumber_field",
     "ya_django_toolkit_jp",
     #
+    # -- Template 拡張 --
+    "mathfilters",
+    #
     # -- Django 標準アプリ --
     "django.contrib.admin",
     "django.contrib.auth",
