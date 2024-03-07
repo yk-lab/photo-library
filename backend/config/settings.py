@@ -10,12 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
-from logging import getLogger
 import os
-from .setting_utils import env_comma_separated_list, env_bool
+from logging import getLogger
+from pathlib import Path
+
+import django_stubs_ext
+
+from .setting_utils import env_bool, env_comma_separated_list
 
 logger = getLogger(__name__)
+
+
+# sbdchd/django-types: :doughnut: Type stubs for Django
+# https://github.com/sbdchd/django-types
+django_stubs_ext.monkeypatch()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
