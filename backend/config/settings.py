@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     "django_filters",
     #
     # -- Model 拡張 --
+    "localflavor",
     "ya_django_toolkit_jp",
     #
     # -- Django 標準アプリ --
