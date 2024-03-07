@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     "rest_framework",
     #
     # -- django その他機能拡張サードパーティ --
+    "django_boost",
     "django_filters",
     #
     # -- Model 拡張 --
