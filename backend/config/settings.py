@@ -59,6 +59,10 @@ if FORCE_HTTPS:
 # Application definition
 
 INSTALLED_APPS = [
+    # -- Django form系 --
+    "crispy_forms",
+    "crispy_tailwind",
+    #
     # -- Django 標準アプリ --
     "django.contrib.admin",
     "django.contrib.auth",
@@ -148,7 +152,15 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# CRISPY FORMS
+# https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
