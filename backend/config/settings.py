@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     #
     # -- Model 拡張 --
     "localflavor",
+    # "phonenumber_field",
     "ya_django_toolkit_jp",
     #
     # -- Django 標準アプリ --
