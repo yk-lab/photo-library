@@ -64,6 +64,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     #
+    # -- django その他機能拡張サードパーティ --
+    "django_filters",
+    #
     # -- Django 標準アプリ --
     "django.contrib.admin",
     "django.contrib.auth",
