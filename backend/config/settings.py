@@ -15,6 +15,7 @@ from logging import getLogger
 from pathlib import Path
 
 import django_stubs_ext
+from corsheaders.defaults import default_headers
 from django_extensions.utils import InternalIPS
 
 from .setting_utils import env_bool, env_comma_separated_list
@@ -64,6 +65,10 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     #
+    # -- rest_framework --
+    "corsheaders",
+    "rest_framework",
+    #
     # -- django その他機能拡張サードパーティ --
     "django_filters",
     #
@@ -85,6 +90,11 @@ if DEBUG:
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    #
+    # django-cors-headers
+    # https://github.com/adamchainz/django-cors-headers
+    "corsheaders.middleware.CorsMiddleware",
+    #
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -159,6 +169,26 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+
+# Django REST framework
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+}
+
+
+# django-cors-headers
+# https://github.com/adamchainz/django-cors-headers
+
+CORS_ALLOWED_ORIGINS = env_comma_separated_list("CORS_ALLOWED_ORIGINS")
+CORS_ALLOWED_ORIGIN_REGEXES = env_comma_separated_list("CORS_ALLOWED_ORIGIN_REGEXES")
+CORS_ALLOW_HEADERS = [
+    *default_headers,
+    "baggage",
+    "Sentry-Trace",
 ]
 
 
