@@ -15,6 +15,7 @@ from logging import getLogger
 from pathlib import Path
 
 import django_stubs_ext
+from django_extensions.utils import InternalIPS
 
 from .setting_utils import env_bool, env_comma_separated_list
 
@@ -71,6 +72,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+if DEBUG:
+    # DebugToolbarMiddleware の設定
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -81,6 +87,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+if DEBUG:
+    # DebugToolbarMiddleware の設定
+    MIDDLEWARE += [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
 
 ROOT_URLCONF = "config.urls"
 
@@ -101,6 +112,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
+
+if DEBUG:
+    # DebugToolbarMiddleware の設定
+    INTERNAL_IPS = InternalIPS(
+        [
+            "10.0.0.0/8",
+            "172.16.0.0/12",
+            "192.168.0.0/16",
+            "127.0.0.1",
+        ]
+    )
 
 
 # Database
