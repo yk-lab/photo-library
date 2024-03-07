@@ -72,6 +72,9 @@ INSTALLED_APPS = [
     # -- django その他機能拡張サードパーティ --
     "django_filters",
     #
+    # -- Model 拡張 --
+    "ya_django_toolkit_jp",
+    #
     # -- Django 標準アプリ --
     "django.contrib.admin",
     "django.contrib.auth",
