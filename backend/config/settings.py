@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     # -- django その他機能拡張サードパーティ --
     "django_extensions",
     "django_boost",
+    "django_utils",
     "django_filters",
     #
     # -- Model 拡張 --
