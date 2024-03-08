@@ -79,7 +79,6 @@ INSTALLED_APPS = [
     "django_boost",
     "django_utils",
     "django_filters",
-    "request_id",
     #
     # -- Model 拡張 --
     "localflavor",
@@ -105,9 +104,9 @@ if DEBUG:
     ]
 
 MIDDLEWARE = [
-    # django-request-id
-    # https://django-request-id.readthedocs.io/en/latest/
-    "request_id.middleware.RequestIdMiddleware",
+    # django-log-request-id
+    # https://github.com/dabapps/django-log-request-id
+    "log_request_id.middleware.RequestIDMiddleware",
     #
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -260,6 +259,14 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 
+# django-log-request-id
+# https://github.com/dabapps/django-log-request-id
+
+LOG_REQUEST_ID_HEADER = "HTTP_X_REQUEST_ID"
+GENERATE_REQUEST_ID_IF_NOT_IN_HEADER = True
+LOG_REQUESTS = True
+
+
 # LOGGING
 # https://docs.djangoproject.com/en/4.2/topics/logging/
 
@@ -267,7 +274,7 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "filters": {
-        "request_id": {"()": "request_id.logging.RequestIdFilter"},
+        "request_id": {"()": "log_request_id.filters.RequestIDFilter"},
         "require_debug_false": {
             "()": "django.utils.log.RequireDebugFalse",
         },
@@ -276,9 +283,8 @@ LOGGING = {
         },
     },
     "formatters": {
-        "console": {
-            "format": "%(asctime)s - %(levelname)-5s [%(name)s] request_id=%(request_id)s %(lineno)s %(funcName)s %(message)s",  # noqa: E501
-            "datefmt": "%H:%M:%S",
+        "standard": {
+            "format": "%(levelname)-8s [%(asctime)s] [%(request_id)s] %(name)s:%(lineno)s %(funcName)s %(message)s"  # noqa: E501
         },
         "django.server": {
             "()": "django.utils.log.ServerFormatter",
