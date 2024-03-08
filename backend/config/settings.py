@@ -44,6 +44,7 @@ DEBUG = env_bool("DEBUG", False)
 
 ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host]
 
+SESSION_COOKIE_HTTPONLY = True
 
 # 環境情報
 ENVIRONMENT = os.getenv("ENVIRONMENT", "Local")
@@ -61,6 +62,10 @@ if FORCE_HTTPS:
 # Application definition
 
 INSTALLED_APPS = [
+    # -- 認証系 --
+    "allauth",
+    "allauth.account",
+    #
     # -- Django form系 --
     "crispy_forms",
     "crispy_tailwind",
@@ -119,6 +124,10 @@ MIDDLEWARE = [
     #
     # django.contrib.admindocs
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    #
+    # django-allauth
+    # https://docs.allauth.org/en/latest/installation/quickstart.html
+    "allauth.account.middleware.AccountMiddleware",
 ]
 if DEBUG:
     # DebugToolbarMiddleware の設定
@@ -167,6 +176,16 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+
+# Auth Settings
+# https://docs.djangoproject.com/en/4.1/ref/settings/#auth
+
+AUTHENTICATION_BACKENDS = [
+    # django-allauth
+    # https://docs.allauth.org/en/latest/installation/quickstart.html
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
 
 # Password validation
