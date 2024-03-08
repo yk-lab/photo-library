@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     "django_boost",
     "django_utils",
     "django_filters",
+    "request_id",
     #
     # -- Model 拡張 --
     "localflavor",
@@ -99,6 +100,10 @@ if DEBUG:
     ]
 
 MIDDLEWARE = [
+    # django-request-id
+    # https://django-request-id.readthedocs.io/en/latest/
+    "request_id.middleware.RequestIdMiddleware",
+    #
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     #
@@ -234,3 +239,72 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
+
+
+# LOGGING
+# https://docs.djangoproject.com/en/4.2/topics/logging/
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {
+        "request_id": {"()": "request_id.logging.RequestIdFilter"},
+        "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+        },
+        "require_debug_true": {
+            "()": "django.utils.log.RequireDebugTrue",
+        },
+    },
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s - %(levelname)-5s [%(name)s] request_id=%(request_id)s %(lineno)s %(funcName)s %(message)s",  # noqa: E501
+            "datefmt": "%H:%M:%S",
+        },
+        "django.server": {
+            "()": "django.utils.log.ServerFormatter",
+            "format": "[{server_time}] [{request_id}] {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG" if DEBUG else "INFO",
+            "filters": ["request_id"],
+            "class": "logging.StreamHandler",
+            "formatter": "standard",
+        },
+        "django.server": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "django.server",
+            "filters": ["request_id"],
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.server": {
+            "handlers": ["django.server"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "rules": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+        "log_request_id.middleware": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG" if DEBUG else "INFO",
+    },
+}
