@@ -3,9 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from guardian.conf import settings as guardian_settings
 from guardian.mixins import GuardianUserMixin
+from ya_django_toolkit_jp.base.models import BaseULIDModel
 
 
-class User(GuardianUserMixin, AbstractUser):
+class User(BaseULIDModel, GuardianUserMixin, AbstractUser):
     first_name = None
     last_name = None
 
