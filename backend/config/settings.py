@@ -82,6 +82,7 @@ INSTALLED_APPS = [
     "rest_framework",
     #
     # -- django その他機能拡張サードパーティ --
+    "extra_settings",
     "django_extensions",
     "django_boost",
     "django_utils",
@@ -273,6 +274,15 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# django-extra-settings
+# https://pypi.org/project/django-extra-settings/
+
+EXTRA_SETTINGS_SHOW_NAME_PREFIX_LIST_FILTER = True
+EXTRA_SETTINGS_SHOW_TYPE_LIST_FILTER = True
+
+EXTRA_SETTINGS_DEFAULTS = {}
 
 
 # CRISPY FORMS

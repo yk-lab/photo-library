@@ -48,6 +48,7 @@ tqdm = "*"
 ulid-py = "*"
 werkzeug = "*"
 ya-django-toolkit-jp = "*"
+django-extra-settings = "*"
 
 [dev-packages]
 bandit = {extras = ["toml"], version = "*"}
