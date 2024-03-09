@@ -17,5 +17,13 @@
   },
   "[jsonl]": {
     "editor.defaultFormatter": "biomejs.biome"
-  }
+  },
+  "python.analysis.extraPaths": [
+    "./app",
+    "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+  ],
+  "python.autoComplete.extraPaths": [
+    "./app",
+    "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+  ]
 }

@@ -187,6 +187,8 @@ DATABASES = {
 # Auth Settings
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth
 
+AUTH_USER_MODEL = "users.User"
+
 AUTHENTICATION_BACKENDS = [
     # django-rules
     # https://github.com/dfunckt/django-rules
@@ -223,6 +225,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://django-guardian.readthedocs.io/en/stable/configuration.html
 
 ANONYMOUS_USER_NAME = "Guest"
+GUARDIAN_MONKEY_PATCH = False
+GUARDIAN_GET_INIT_ANONYMOUS_USER = "users.utils.get_anonymous_user_instance"
 
 
 # Django REST framework
