@@ -16,6 +16,7 @@ from pathlib import Path
 
 import django_stubs_ext
 from corsheaders.defaults import default_headers
+from django.utils.translation import gettext_lazy as _
 from django_extensions.utils import InternalIPS
 
 from .setting_utils import env_bool, env_comma_separated_list
@@ -222,6 +223,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# allauth
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+
+ACCOUNT_ADAPTER = "account.adapters.AccountAdapter"
+
+
 # django-guardian
 # https://django-guardian.readthedocs.io/en/stable/configuration.html
 
@@ -282,7 +289,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 EXTRA_SETTINGS_SHOW_NAME_PREFIX_LIST_FILTER = True
 EXTRA_SETTINGS_SHOW_TYPE_LIST_FILTER = True
 
-EXTRA_SETTINGS_DEFAULTS = {}
+EXTRA_SETTINGS_DEFAULTS = [
+    {
+        "name": "ACCOUNT_IS_OPEN_FOR_SIGNUP",
+        "type": "bool",
+        "value": False,
+        "description": _("If 'True', users can sign up by themselves."),
+    },
+]
 
 
 # CRISPY FORMS
