@@ -219,6 +219,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# django-guardian
+# https://django-guardian.readthedocs.io/en/stable/configuration.html
+
+ANONYMOUS_USER_NAME = "Guest"
+
+
 # Django REST framework
 # https://www.django-rest-framework.org/
 
