@@ -69,6 +69,9 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     #
+    # -- 権限系 --
+    "rules",
+    #
     # -- Django form系 --
     "crispy_forms",
     "crispy_tailwind",
@@ -184,6 +187,9 @@ DATABASES = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth
 
 AUTHENTICATION_BACKENDS = [
+    # django-rules
+    # https://github.com/dfunckt/django-rules
+    "rules.permissions.ObjectPermissionBackend",
     # django-allauth
     # https://docs.allauth.org/en/latest/installation/quickstart.html
     "allauth.account.auth_backends.AuthenticationBackend",
