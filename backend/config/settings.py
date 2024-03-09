@@ -62,6 +62,9 @@ if FORCE_HTTPS:
 # Application definition
 
 INSTALLED_APPS = [
+    # -- 自作アプリ --
+    "users",
+    #
     # -- 認証系 --
     "allauth",
     "allauth.account",
