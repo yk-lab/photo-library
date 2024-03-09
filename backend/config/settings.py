@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     #
     # -- 権限系 --
     "rules",
+    "guardian",
     #
     # -- Django form系 --
     "crispy_forms",
@@ -193,6 +194,9 @@ AUTHENTICATION_BACKENDS = [
     # django-allauth
     # https://docs.allauth.org/en/latest/installation/quickstart.html
     "allauth.account.auth_backends.AuthenticationBackend",
+    # django-guardian
+    # https://django-guardian.readthedocs.io/en/stable/configuration.html
+    "guardian.backends.ObjectPermissionBackend",
 ]
 
 
