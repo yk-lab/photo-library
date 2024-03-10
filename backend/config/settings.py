@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import re
 from logging import getLogger
 from pathlib import Path
 
@@ -96,6 +97,9 @@ INSTALLED_APPS = [
     #
     # -- Template 拡張 --
     "mathfilters",
+    #
+    # -- フロントエンド系 --
+    "django_vite",
     #
     # -- Django 標準アプリ --
     "django.contrib.admin",
@@ -256,6 +260,15 @@ CORS_ALLOW_HEADERS = [
     "Sentry-Trace",
 ]
 
+if DEBUG:
+    # django-vite のための corsheaders の設定
+    CORS_ALLOWED_ORIGINS += [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
+
+    CORS_URLS_REGEX = r"^.*$"  # 全てのURLに対してCORSを許可する
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -271,10 +284,34 @@ USE_I18N = True
 USE_TZ = True
 
 
+# django-vite
+# https://github.com/MrBin99/django-vite
+
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / ".." / "frontend" / "dist"
+DJANGO_VITE_DEV_MODE = DEBUG
+DJANGO_VITE_DEV_SERVER_PORT = 5173
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "collectedstatic"
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
+
+
+# https://github.com/MrBin99/django-vite#notes
+# Vite generates files with 8 hash digits
+# http://whitenoise.evans.io/en/stable/django.html#WHITENOISE_IMMUTABLE_FILE_TEST
+
+
+def immutable_file_test(path, url):
+    # Match filename with 12 hex digits before the extension
+    # e.g. app.db8f2edc0c8a.js
+    return re.match(r"^.+\.[0-9a-f]{8,12}\..+$", url)
+
+
+WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
 
 
 # Default primary key field type
