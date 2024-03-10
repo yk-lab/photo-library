@@ -36,6 +36,7 @@ export default defineConfig({
     target: 'es2017',
     rollupOptions: {
       input: {
+        index: resolve('./frontend/src/entries/index.ts'),
       },
       output: {
         chunkFileNames: undefined,
