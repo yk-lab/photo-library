@@ -1,11 +1,16 @@
 import Cookies from "js-cookie";
 import { ofetch } from 'ofetch';
 
+/**
+ * Logout class
+ * @param {string} url - The url to logout
+ * @param {string} method - The method to use
+ * @param {Record<string, unknown>} data - The data to send
+ *
+ * @see https://inertiajs.com/links
+ */
 class Logout {
-  constructor(private url: string, private method: string, private data: Record<string, unknown> = {}) {
-    this.url = url;
-    this.method = method;
-  }
+  constructor(private url: string, private method: string, private data: Record<string, unknown> = {}) { }
 
   public async logout() {
     try {
