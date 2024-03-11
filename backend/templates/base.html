@@ -1,0 +1,45 @@
+{% load django_vite %}
+<!doctype html>
+<html lang="ja" class="h-full">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% block head_title %}
+    {% endblock head_title %}
+  </title>
+  {% if debug %}
+    {% vite_hmr_client %}
+  {% endif %}
+  {% block extra_head %}
+    {% vite_asset 'entries/index.ts' %}
+  {% endblock %}
+</head>
+
+<body class="{% block bodyclass %}{% endblock bodyclass %}">
+  {% block body %}
+    {% block site_header %}
+      {% include "components/site_header.html" %}
+    {% endblock site_header %}
+
+    {% include 'components/message-notifications.html' %}
+
+    {% block content %}
+    {% endblock content %}
+
+    <div id="js-page-loader" class="fixed inset-0 items-center justify-center bg-black/25">
+      <svg class="h-10 w-10 animate-spin text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+        </path>
+      </svg>
+      <span class="sr-only">読み込み中...</span>
+    </div>
+  {% endblock body %}
+  {% block extra_body %}
+  {% endblock extra_body %}
+</body>
+
+</html>
