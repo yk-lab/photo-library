@@ -20,15 +20,15 @@ from django.contrib import admin
 from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import include, path
 
+# https://docs.allauth.org/en/latest/common/admin.html
+admin.site.login = staff_member_required(admin.site.login, login_url=settings.LOGIN_URL)
+
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
 ]
 
-
-# https://docs.allauth.org/en/latest/common/admin.html
-admin.site.login = staff_member_required(admin.site.login, login_url=settings.LOGIN_URL)
 
 if settings.DEBUG:
     import debug_toolbar

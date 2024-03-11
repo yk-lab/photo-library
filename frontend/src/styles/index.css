@@ -6,6 +6,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+:focus {
+  --tw-ring-color: theme("colors.cyan.500") !important;
+  border-color: theme("colors.cyan.500") !important;
+}
+
+a, button, input[type="submit"] {
+  &:focus-visible {
+    @apply outline outline-2 outline-offset-2;
+    outline-color: var(--tw-ring-color) !important;
+  }
+}
+
 [x-cloak] {
   @apply hidden;
 }

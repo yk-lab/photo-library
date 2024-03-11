@@ -1,0 +1,38 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth account %}
+{% load crispy_forms_tags %}
+{% load extra_settings %}
+{% load heroicons %}
+
+{% block head_title %}
+    {% trans "Sign In" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    {% heroicon_solid 'camera' class="mx-auto h-10 w-auto text-cyan-500" aria_hidden="true" %}
+    <h2 class="text-lg text-center text-gray-900 font-bold">
+      {% trans "Sign In" %}
+    </h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      {% crispy form %}
+      {% if SOCIALACCOUNT_ENABLED %}
+          {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+      {% endif %}
+    </div>
+
+    {% get_setting 'ACCOUNT_IS_OPEN_FOR_SIGNUP' as ACCOUNT_IS_OPEN_FOR_SIGNUP %}
+    {% if ACCOUNT_IS_OPEN_FOR_SIGNUP %}
+    <p class="mt-10 prose prose-sm text-center text-gray-500 prose-a:leading-6 prose-a:text-cyan-600 prose-a:no-underline hover:prose-a:underline">
+      {% blocktrans %}If you have not created an account yet, then please
+    <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+    </p>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

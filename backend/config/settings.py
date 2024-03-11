@@ -96,6 +96,7 @@ INSTALLED_APPS = [
     "ya_django_toolkit_jp",
     #
     # -- Template 拡張 --
+    "heroicons",
     "mathfilters",
     #
     # -- フロントエンド系 --
@@ -228,9 +229,13 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # allauth
-# https://django-allauth.readthedocs.io/en/latest/configuration.html
+# https://docs.allauth.org/en/latest/account/configuration.html
 
 ACCOUNT_ADAPTER = "account.adapters.AccountAdapter"
+
+ACCOUNT_FORMS = {
+    "login": "account.forms.LoginForm",
+}
 
 
 # django-guardian
