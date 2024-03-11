@@ -7,27 +7,31 @@ import ui from "@alpinejs/ui";
 import Alpine from "alpinejs";
 import ScrollHint from "scroll-hint";
 
+import LogoutButton from "../utils/logout-button";
+
 import "../styles/index.css";
 
 (() => {
-    const onDOMContentLoaded = () => {
-        new ScrollHint("[data-scroll-hint]", {
-            suggestiveShadow: true,
-            i18n: {
-                scrollable: "スクロールできます",
-            },
-        });
+  const onDOMContentLoaded = () => {
+    new ScrollHint("[data-scroll-hint]", {
+      suggestiveShadow: true,
+      i18n: {
+        scrollable: "スクロールできます",
+      },
+    });
 
-        Alpine.plugin(focus);
-        Alpine.plugin(ui);
-        Alpine.start();
-    };
+    Alpine.plugin(focus);
+    Alpine.plugin(ui);
+    Alpine.start();
 
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", () => {
-            onDOMContentLoaded();
-        });
-    } else {
-        onDOMContentLoaded();
-    }
+    LogoutButton.capture();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      onDOMContentLoaded();
+    });
+  } else {
+    onDOMContentLoaded();
+  }
 })();
