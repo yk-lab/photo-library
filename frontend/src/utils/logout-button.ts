@@ -30,7 +30,13 @@ class Logout {
       }
     } catch (err) {
       console.error("Failed to logout", err);
-      Sentry.captureException(err);
+      Sentry.captureException(err, {
+        extra: {
+          url: this.url,
+          method: this.method,
+          data: this.data,
+        },
+      });
     }
   }
 }

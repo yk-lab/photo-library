@@ -29,7 +29,8 @@ if (import.meta.env.VITE_SENTRY_DSN) {
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
+    // tracesSampleRate: 1.0,
+    tracesSampleRate: 0.1, // TODO: 設定変更できるようにする
 
     // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
     tracePropagationTargets: [location.hostname],
