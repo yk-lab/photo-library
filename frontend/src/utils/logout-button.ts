@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import Cookies from "js-cookie";
 import { ofetch } from 'ofetch';
 
@@ -29,6 +30,7 @@ class Logout {
       }
     } catch (err) {
       console.error("Failed to logout", err);
+      Sentry.captureException(err);
     }
   }
 }
