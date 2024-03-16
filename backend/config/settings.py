@@ -65,6 +65,7 @@ if FORCE_HTTPS:
 
 INSTALLED_APPS = [
     # -- 自作アプリ --
+    "core",
     "users",
     #
     # -- 認証系 --

@@ -24,6 +24,7 @@ from django.urls import include, path
 admin.site.login = staff_member_required(admin.site.login, login_url=settings.LOGIN_URL)
 
 urlpatterns = [
+    path("", include("core.urls")),
     path("accounts/", include("allauth.urls")),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin.site.urls),
