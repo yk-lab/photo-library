@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     # -- 自作アプリ --
     "core",
     "users",
+    "masters",
     #
     # -- 認証系 --
     "allauth",
