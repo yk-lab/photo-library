@@ -1,5 +1,26 @@
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { resolve } from 'path';
+import { webpackStats } from 'rollup-plugin-webpack-stats';
 import { defineConfig } from 'vite';
+
+const sentryPlugin = () => {
+  if (!process.env.SENTRY_AUTH_TOKEN || !process.env.SENTRY_ORG || !process.env.SENTRY_PROJECT || !process.env.SENTRY_RELEASE_FINALIZE) {
+    return null;
+  }
+
+  return sentryVitePlugin({
+    authToken: process.env.SENTRY_AUTH_TOKEN,
+    org: process.env.SENTRY_ORG,
+    project: process.env.SENTRY_PROJECT,
+    telemetry: false,
+    release: {
+      finalize: !!process.env.SENTRY_RELEASE_FINALIZE,
+      setCommits: {
+        auto: true,
+      },
+    },
+  });
+};
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,6 +49,7 @@ export default defineConfig({
   },
 
   build: {
+    sourcemap: true,
     // コンパイル後の出力先。DJANGO_VITE_ASSET_PATHと一致させる
     outDir: resolve('./frontend/dist'),
     assetsDir: '',
@@ -43,4 +65,14 @@ export default defineConfig({
       },
     },
   },
+
+  plugins: [
+    // Output webpack-stats.json file
+    // https://relative-ci.com/documentation/guides/bundle-stats/vite
+    webpackStats(),
+
+    // Sentry Vite plugin
+    // Put the Sentry vite plugin after all other plugins
+    sentryPlugin(),
+  ],
 });
