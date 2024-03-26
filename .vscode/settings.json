@@ -1,0 +1,29 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonl]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "python.analysis.extraPaths": [
+    "./app",
+    "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+  ],
+  "python.autoComplete.extraPaths": [
+    "./app",
+    "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+  ]
+}

@@ -1,0 +1,46 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./backend/
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          cache: "pipenv"
+      - name: install pipenv
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pipenv
+      - name: Install dependencies
+        run: pipenv install --dev
+      - name: Check security
+        run: |
+          pipenv check
+          pipenv run ./manage.py check
+          pipenv run bandit -c ../pyproject.toml -r .
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      - name: Lint
+        run: |
+          pipenv run pre-commit install
+          git fetch origin ${{ github.base_ref }} --depth=1
+          SKIP=no-commit-to-branch pipenv run pre-commit run --show-diff-on-failure --color=always --all-files
+      - name: Test
+        run: |
+          pipenv run ./manage.py test
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
